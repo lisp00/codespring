@@ -40,4 +40,12 @@
 	where bno = #{bno}
 </update>
 
+<select id="getListWithPaging" resultType="org.zerock.domain.BoardVO">
+	 select R1.* from(
+	 	select bno, title, content, writer, regdate, updatedate
+	 	from tbl_board
+	 	order by bno desc
+	 ) R1
+	 LIMIT #{pageNum}, #{amount}
+</select>
 </mapper>

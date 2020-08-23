@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.zerock.domain.BoardVO;
+import org.zerock.domain.Criteria;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -19,6 +20,15 @@ import lombok.extern.log4j.Log4j;
 public class BoardMapperTests {
 	@Setter(onMethod_ = @Autowired)
 	private BoardMapper mapper;
+	
+	@Test
+	public void testPaging() {
+		Criteria cri = new Criteria();
+		cri.setPageNum(1);
+		cri.setAmount(8);
+		List<BoardVO> list = mapper.getListWithPaging(cri);
+		list.forEach(board -> log.info(board));
+	}
 	
 //	@Test
 //	public void testInsert() {
@@ -35,17 +45,17 @@ public class BoardMapperTests {
 //		mapper.getList().forEach(board -> log.info(board));
 //	}
 	
-	@Test
-	public void testInsertSelectkey() {
-		BoardVO board = new BoardVO();
-		board.setTitle("새로 작성하는 글 select key");
-		board.setContent("새로 작성하는 내용 select key");
-		board.setWriter("newbie2");
-		
-		mapper.insertSelectKey(board);
-		
-		log.info(board);
-	}
+//	@Test
+//	public void testInsertSelectkey() {
+//		BoardVO board = new BoardVO();
+//		board.setTitle("새로 작성하는 글 select key");
+//		board.setContent("새로 작성하는 내용 select key");
+//		board.setWriter("newbie2");
+//		
+//		mapper.insertSelectKey(board);
+//		
+//		log.info(board);
+//	}
 	
 //	@Test
 //	public void testRead() {
